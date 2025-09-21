@@ -1,11 +1,12 @@
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_ollama import ChatOllama
 
 load_dotenv()
 
 def main():
-    print("Hello from langchain-course!")
+    print("Hello from langchain-course with Gemini!")
     information = """
     Warren Edward Buffett (/ˈbʌfɪt/ BUFF-it; born August 30, 1930)[2] is an American investor and philanthropist who currently serves as the chairman and CEO of the conglomerate holding company Berkshire Hathaway. As a result of his investment success, Buffett is one of the best-known investors in the world. According to Forbes, as of May 2025, Buffett's estimated net worth stood at US$160.2 billion, making him the fifth-richest individual in the world.[3]
 
@@ -26,12 +27,13 @@ Since 1970,[needs update] Buffett has presided as the chairman and largest share
         input_variables=["information"]
     )
 
-    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
+    #llm = ChatOllama(model="gemma3:270m", temperature=0)
     chain = summary_prompt_template | llm
     response = chain.invoke(
         input={"information": information}
     )
-    print(response)
+    print(response.content)
 
 if __name__ == "__main__":
     main()
