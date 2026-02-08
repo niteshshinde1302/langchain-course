@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 
 load_dotenv()
 
@@ -26,12 +27,13 @@ Since 1970,[needs update] Buffett has presided as the chairman and largest share
         input_variables=["information"]
     )
 
-    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    #llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    llm = ChatOllama(model="gemma3:270m", temperature=0)
     chain = summary_prompt_template | llm
     response = chain.invoke(
         input={"information": information}
     )
-    print(response)
+    print(response.content)
 
 if __name__ == "__main__":
     main()
