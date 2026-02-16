@@ -8,6 +8,7 @@ dependencies = [
     "black>=26.1.0",
     "isort>=7.0.0",
     "langchain>=1.2.9",
+    "langchain-classic>=1.0.1",
     "langchain-anthropic>=1.3.2",
     "langchain-gemini>=0.1.1",
     "langchain-ollama>=1.0.1",
